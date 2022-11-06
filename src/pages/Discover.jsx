@@ -1,8 +1,14 @@
 import { Error, Loader, SongCard } from "../components";
 import { genres } from "../assets/constants";
+import { useGetTopChartQuery } from "../redux/services/shazamCore";
 
 const Discover = () => {
+  const { data, isFetching, error } = useGetTopChartQuery();
   const genreTitle = "Pop";
+
+  if (isFetching) return <Loader title="Loading songs" />;
+
+  if (error) return <Error />;
   return (
     <div className="flex flex-col">
       <div className="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10">
@@ -18,6 +24,11 @@ const Discover = () => {
             <option key={genre.value}>{genre.title}</option>
           ))}
         </select>
+      </div>
+      <div className="flex flex-wrap sm:justify-start justify-center gap-8">
+        {data?.map((song, i) => (
+          <SongCard key={Math.random(song)} song={song} i={i} />
+        ))}
       </div>
     </div>
   );
