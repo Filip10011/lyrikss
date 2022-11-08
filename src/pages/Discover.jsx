@@ -1,7 +1,7 @@
 import { Error, Loader, SongCard } from "../components";
 import { genres } from "../assets/constants";
 import {
-  useGetTopChartQuery,
+  useGetTopChartsQuery,
   useGetSongsByGenreQuery,
 } from "../redux/services/shazamCore";
 import { useDispatch, useSelector } from "react-redux";
